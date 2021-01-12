@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.erp.base.mapper.DepMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.erp.base.model.Dep" >
+    <constructor >
+      <idArg column="dep_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="dep_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="dep_tele" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dep_id, dep_name, dep_tele
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dep
+    where dep_id = #{depId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dep
+    where dep_id = #{depId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.erp.base.model.Dep" >
+    insert into dep (dep_id, dep_name, dep_tele
+      )
+    values (#{depId,jdbcType=BIGINT}, #{depName,jdbcType=VARCHAR}, #{depTele,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.erp.base.model.Dep" >
+    insert into dep
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="depId != null" >
+        dep_id,
+      </if>
+      <if test="depName != null" >
+        dep_name,
+      </if>
+      <if test="depTele != null" >
+        dep_tele,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="depId != null" >
+        #{depId,jdbcType=BIGINT},
+      </if>
+      <if test="depName != null" >
+        #{depName,jdbcType=VARCHAR},
+      </if>
+      <if test="depTele != null" >
+        #{depTele,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.erp.base.model.Dep" >
+    update dep
+    <set >
+      <if test="depName != null" >
+        dep_name = #{depName,jdbcType=VARCHAR},
+      </if>
+      <if test="depTele != null" >
+        dep_tele = #{depTele,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dep_id = #{depId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.erp.base.model.Dep" >
+    update dep
+    set dep_name = #{depName,jdbcType=VARCHAR},
+      dep_tele = #{depTele,jdbcType=VARCHAR}
+    where dep_id = #{depId,jdbcType=BIGINT}
+  </update>
+</mapper>

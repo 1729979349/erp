@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.erp.base.mapper.ReturnorderdetailMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.erp.base.model.Returnorderdetail" >
+    <constructor >
+      <idArg column="returnorderdetail_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="returnorderdetail_goods_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="returnorderdetail_goodsname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="returnorderdetail_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="returnorderdetail_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="returnorderdetail_money" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="returnorderdetail_endtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="returnorderdetail_ender" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="returnorderdetail_store_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="returnorderdetail_state" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="returnorderdetail_orders_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    returnorderdetail_id, returnorderdetail_goods_id, returnorderdetail_goodsname, returnorderdetail_price, 
+    returnorderdetail_num, returnorderdetail_money, returnorderdetail_endtime, returnorderdetail_ender, 
+    returnorderdetail_store_id, returnorderdetail_state, returnorderdetail_orders_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from returnorderdetail
+    where returnorderdetail_id = #{returnorderdetailId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from returnorderdetail
+    where returnorderdetail_id = #{returnorderdetailId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.erp.base.model.Returnorderdetail" >
+    insert into returnorderdetail (returnorderdetail_id, returnorderdetail_goods_id, 
+      returnorderdetail_goodsname, returnorderdetail_price, 
+      returnorderdetail_num, returnorderdetail_money, 
+      returnorderdetail_endtime, returnorderdetail_ender, 
+      returnorderdetail_store_id, returnorderdetail_state, 
+      returnorderdetail_orders_id)
+    values (#{returnorderdetailId,jdbcType=BIGINT}, #{returnorderdetailGoodsId,jdbcType=BIGINT}, 
+      #{returnorderdetailGoodsname,jdbcType=VARCHAR}, #{returnorderdetailPrice,jdbcType=DECIMAL}, 
+      #{returnorderdetailNum,jdbcType=INTEGER}, #{returnorderdetailMoney,jdbcType=DECIMAL}, 
+      #{returnorderdetailEndtime,jdbcType=TIMESTAMP}, #{returnorderdetailEnder,jdbcType=BIGINT}, 
+      #{returnorderdetailStoreId,jdbcType=BIGINT}, #{returnorderdetailState,jdbcType=CHAR}, 
+      #{returnorderdetailOrdersId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.erp.base.model.Returnorderdetail" >
+    insert into returnorderdetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="returnorderdetailId != null" >
+        returnorderdetail_id,
+      </if>
+      <if test="returnorderdetailGoodsId != null" >
+        returnorderdetail_goods_id,
+      </if>
+      <if test="returnorderdetailGoodsname != null" >
+        returnorderdetail_goodsname,
+      </if>
+      <if test="returnorderdetailPrice != null" >
+        returnorderdetail_price,
+      </if>
+      <if test="returnorderdetailNum != null" >
+        returnorderdetail_num,
+      </if>
+      <if test="returnorderdetailMoney != null" >
+        returnorderdetail_money,
+      </if>
+      <if test="returnorderdetailEndtime != null" >
+        returnorderdetail_endtime,
+      </if>
+      <if test="returnorderdetailEnder != null" >
+        returnorderdetail_ender,
+      </if>
+      <if test="returnorderdetailStoreId != null" >
+        returnorderdetail_store_id,
+      </if>
+      <if test="returnorderdetailState != null" >
+        returnorderdetail_state,
+      </if>
+      <if test="returnorderdetailOrdersId != null" >
+        returnorderdetail_orders_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="returnorderdetailId != null" >
+        #{returnorderdetailId,jdbcType=BIGINT},
+      </if>
+      <if test="returnorderdetailGoodsId != null" >
+        #{returnorderdetailGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="returnorderdetailGoodsname != null" >
+        #{returnorderdetailGoodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="returnorderdetailPrice != null" >
+        #{returnorderdetailPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="returnorderdetailNum != null" >
+        #{returnorderdetailNum,jdbcType=INTEGER},
+      </if>
+      <if test="returnorderdetailMoney != null" >
+        #{returnorderdetailMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="returnorderdetailEndtime != null" >
+        #{returnorderdetailEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnorderdetailEnder != null" >
+        #{returnorderdetailEnder,jdbcType=BIGINT},
+      </if>
+      <if test="returnorderdetailStoreId != null" >
+        #{returnorderdetailStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="returnorderdetailState != null" >
+        #{returnorderdetailState,jdbcType=CHAR},
+      </if>
+      <if test="returnorderdetailOrdersId != null" >
+        #{returnorderdetailOrdersId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.erp.base.model.Returnorderdetail" >
+    update returnorderdetail
+    <set >
+      <if test="returnorderdetailGoodsId != null" >
+        returnorderdetail_goods_id = #{returnorderdetailGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="returnorderdetailGoodsname != null" >
+        returnorderdetail_goodsname = #{returnorderdetailGoodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="returnorderdetailPrice != null" >
+        returnorderdetail_price = #{returnorderdetailPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="returnorderdetailNum != null" >
+        returnorderdetail_num = #{returnorderdetailNum,jdbcType=INTEGER},
+      </if>
+      <if test="returnorderdetailMoney != null" >
+        returnorderdetail_money = #{returnorderdetailMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="returnorderdetailEndtime != null" >
+        returnorderdetail_endtime = #{returnorderdetailEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnorderdetailEnder != null" >
+        returnorderdetail_ender = #{returnorderdetailEnder,jdbcType=BIGINT},
+      </if>
+      <if test="returnorderdetailStoreId != null" >
+        returnorderdetail_store_id = #{returnorderdetailStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="returnorderdetailState != null" >
+        returnorderdetail_state = #{returnorderdetailState,jdbcType=CHAR},
+      </if>
+      <if test="returnorderdetailOrdersId != null" >
+        returnorderdetail_orders_id = #{returnorderdetailOrdersId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where returnorderdetail_id = #{returnorderdetailId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.erp.base.model.Returnorderdetail" >
+    update returnorderdetail
+    set returnorderdetail_goods_id = #{returnorderdetailGoodsId,jdbcType=BIGINT},
+      returnorderdetail_goodsname = #{returnorderdetailGoodsname,jdbcType=VARCHAR},
+      returnorderdetail_price = #{returnorderdetailPrice,jdbcType=DECIMAL},
+      returnorderdetail_num = #{returnorderdetailNum,jdbcType=INTEGER},
+      returnorderdetail_money = #{returnorderdetailMoney,jdbcType=DECIMAL},
+      returnorderdetail_endtime = #{returnorderdetailEndtime,jdbcType=TIMESTAMP},
+      returnorderdetail_ender = #{returnorderdetailEnder,jdbcType=BIGINT},
+      returnorderdetail_store_id = #{returnorderdetailStoreId,jdbcType=BIGINT},
+      returnorderdetail_state = #{returnorderdetailState,jdbcType=CHAR},
+      returnorderdetail_orders_id = #{returnorderdetailOrdersId,jdbcType=BIGINT}
+    where returnorderdetail_id = #{returnorderdetailId,jdbcType=BIGINT}
+  </update>
+</mapper>

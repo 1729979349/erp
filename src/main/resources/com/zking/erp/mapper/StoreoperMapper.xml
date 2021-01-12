@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.erp.base.mapper.StoreoperMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.erp.base.model.Storeoper" >
+    <constructor >
+      <idArg column="storeoper_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="storeoper_emp_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="storeoper_opertime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="storeoper_store_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="storeoper_goods_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="storeoper_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="storeoper_type" jdbcType="CHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    storeoper_id, storeoper_emp_id, storeoper_opertime, storeoper_store_id, storeoper_goods_id, 
+    storeoper_num, storeoper_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from storeoper
+    where storeoper_id = #{storeoperId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from storeoper
+    where storeoper_id = #{storeoperId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.erp.base.model.Storeoper" >
+    insert into storeoper (storeoper_id, storeoper_emp_id, storeoper_opertime, 
+      storeoper_store_id, storeoper_goods_id, storeoper_num, 
+      storeoper_type)
+    values (#{storeoperId,jdbcType=BIGINT}, #{storeoperEmpId,jdbcType=BIGINT}, #{storeoperOpertime,jdbcType=TIMESTAMP}, 
+      #{storeoperStoreId,jdbcType=BIGINT}, #{storeoperGoodsId,jdbcType=BIGINT}, #{storeoperNum,jdbcType=INTEGER}, 
+      #{storeoperType,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.erp.base.model.Storeoper" >
+    insert into storeoper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="storeoperId != null" >
+        storeoper_id,
+      </if>
+      <if test="storeoperEmpId != null" >
+        storeoper_emp_id,
+      </if>
+      <if test="storeoperOpertime != null" >
+        storeoper_opertime,
+      </if>
+      <if test="storeoperStoreId != null" >
+        storeoper_store_id,
+      </if>
+      <if test="storeoperGoodsId != null" >
+        storeoper_goods_id,
+      </if>
+      <if test="storeoperNum != null" >
+        storeoper_num,
+      </if>
+      <if test="storeoperType != null" >
+        storeoper_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="storeoperId != null" >
+        #{storeoperId,jdbcType=BIGINT},
+      </if>
+      <if test="storeoperEmpId != null" >
+        #{storeoperEmpId,jdbcType=BIGINT},
+      </if>
+      <if test="storeoperOpertime != null" >
+        #{storeoperOpertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeoperStoreId != null" >
+        #{storeoperStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="storeoperGoodsId != null" >
+        #{storeoperGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="storeoperNum != null" >
+        #{storeoperNum,jdbcType=INTEGER},
+      </if>
+      <if test="storeoperType != null" >
+        #{storeoperType,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.erp.base.model.Storeoper" >
+    update storeoper
+    <set >
+      <if test="storeoperEmpId != null" >
+        storeoper_emp_id = #{storeoperEmpId,jdbcType=BIGINT},
+      </if>
+      <if test="storeoperOpertime != null" >
+        storeoper_opertime = #{storeoperOpertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeoperStoreId != null" >
+        storeoper_store_id = #{storeoperStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="storeoperGoodsId != null" >
+        storeoper_goods_id = #{storeoperGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="storeoperNum != null" >
+        storeoper_num = #{storeoperNum,jdbcType=INTEGER},
+      </if>
+      <if test="storeoperType != null" >
+        storeoper_type = #{storeoperType,jdbcType=CHAR},
+      </if>
+    </set>
+    where storeoper_id = #{storeoperId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.erp.base.model.Storeoper" >
+    update storeoper
+    set storeoper_emp_id = #{storeoperEmpId,jdbcType=BIGINT},
+      storeoper_opertime = #{storeoperOpertime,jdbcType=TIMESTAMP},
+      storeoper_store_id = #{storeoperStoreId,jdbcType=BIGINT},
+      storeoper_goods_id = #{storeoperGoodsId,jdbcType=BIGINT},
+      storeoper_num = #{storeoperNum,jdbcType=INTEGER},
+      storeoper_type = #{storeoperType,jdbcType=CHAR}
+    where storeoper_id = #{storeoperId,jdbcType=BIGINT}
+  </update>
+</mapper>

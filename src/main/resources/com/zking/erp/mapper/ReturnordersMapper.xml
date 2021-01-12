@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.erp.base.mapper.ReturnordersMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.erp.base.model.Returnorders" >
+    <constructor >
+      <idArg column="returnorders_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="returnorders_createtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="returnorders_checktime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="returnorders_endtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="returnorders_type" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="returnorders_creater" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="returnorders_checker" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="returnorders_ender" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="returnorders_supplier_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="returnorders_totalmoney" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="returnorders_state" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="returnorders_waybillsn" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="returnorders_orders_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    returnorders_id, returnorders_createtime, returnorders_checktime, returnorders_endtime, 
+    returnorders_type, returnorders_creater, returnorders_checker, returnorders_ender, 
+    returnorders_supplier_id, returnorders_totalmoney, returnorders_state, returnorders_waybillsn, 
+    returnorders_orders_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from returnorders
+    where returnorders_id = #{returnordersId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from returnorders
+    where returnorders_id = #{returnordersId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.erp.base.model.Returnorders" >
+    insert into returnorders (returnorders_id, returnorders_createtime, 
+      returnorders_checktime, returnorders_endtime, 
+      returnorders_type, returnorders_creater, returnorders_checker, 
+      returnorders_ender, returnorders_supplier_id, 
+      returnorders_totalmoney, returnorders_state, 
+      returnorders_waybillsn, returnorders_orders_id
+      )
+    values (#{returnordersId,jdbcType=BIGINT}, #{returnordersCreatetime,jdbcType=TIMESTAMP}, 
+      #{returnordersChecktime,jdbcType=TIMESTAMP}, #{returnordersEndtime,jdbcType=TIMESTAMP}, 
+      #{returnordersType,jdbcType=CHAR}, #{returnordersCreater,jdbcType=BIGINT}, #{returnordersChecker,jdbcType=BIGINT}, 
+      #{returnordersEnder,jdbcType=BIGINT}, #{returnordersSupplierId,jdbcType=BIGINT}, 
+      #{returnordersTotalmoney,jdbcType=DECIMAL}, #{returnordersState,jdbcType=CHAR}, 
+      #{returnordersWaybillsn,jdbcType=VARCHAR}, #{returnordersOrdersId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.erp.base.model.Returnorders" >
+    insert into returnorders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="returnordersId != null" >
+        returnorders_id,
+      </if>
+      <if test="returnordersCreatetime != null" >
+        returnorders_createtime,
+      </if>
+      <if test="returnordersChecktime != null" >
+        returnorders_checktime,
+      </if>
+      <if test="returnordersEndtime != null" >
+        returnorders_endtime,
+      </if>
+      <if test="returnordersType != null" >
+        returnorders_type,
+      </if>
+      <if test="returnordersCreater != null" >
+        returnorders_creater,
+      </if>
+      <if test="returnordersChecker != null" >
+        returnorders_checker,
+      </if>
+      <if test="returnordersEnder != null" >
+        returnorders_ender,
+      </if>
+      <if test="returnordersSupplierId != null" >
+        returnorders_supplier_id,
+      </if>
+      <if test="returnordersTotalmoney != null" >
+        returnorders_totalmoney,
+      </if>
+      <if test="returnordersState != null" >
+        returnorders_state,
+      </if>
+      <if test="returnordersWaybillsn != null" >
+        returnorders_waybillsn,
+      </if>
+      <if test="returnordersOrdersId != null" >
+        returnorders_orders_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="returnordersId != null" >
+        #{returnordersId,jdbcType=BIGINT},
+      </if>
+      <if test="returnordersCreatetime != null" >
+        #{returnordersCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnordersChecktime != null" >
+        #{returnordersChecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnordersEndtime != null" >
+        #{returnordersEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnordersType != null" >
+        #{returnordersType,jdbcType=CHAR},
+      </if>
+      <if test="returnordersCreater != null" >
+        #{returnordersCreater,jdbcType=BIGINT},
+      </if>
+      <if test="returnordersChecker != null" >
+        #{returnordersChecker,jdbcType=BIGINT},
+      </if>
+      <if test="returnordersEnder != null" >
+        #{returnordersEnder,jdbcType=BIGINT},
+      </if>
+      <if test="returnordersSupplierId != null" >
+        #{returnordersSupplierId,jdbcType=BIGINT},
+      </if>
+      <if test="returnordersTotalmoney != null" >
+        #{returnordersTotalmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="returnordersState != null" >
+        #{returnordersState,jdbcType=CHAR},
+      </if>
+      <if test="returnordersWaybillsn != null" >
+        #{returnordersWaybillsn,jdbcType=VARCHAR},
+      </if>
+      <if test="returnordersOrdersId != null" >
+        #{returnordersOrdersId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.erp.base.model.Returnorders" >
+    update returnorders
+    <set >
+      <if test="returnordersCreatetime != null" >
+        returnorders_createtime = #{returnordersCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnordersChecktime != null" >
+        returnorders_checktime = #{returnordersChecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnordersEndtime != null" >
+        returnorders_endtime = #{returnordersEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnordersType != null" >
+        returnorders_type = #{returnordersType,jdbcType=CHAR},
+      </if>
+      <if test="returnordersCreater != null" >
+        returnorders_creater = #{returnordersCreater,jdbcType=BIGINT},
+      </if>
+      <if test="returnordersChecker != null" >
+        returnorders_checker = #{returnordersChecker,jdbcType=BIGINT},
+      </if>
+      <if test="returnordersEnder != null" >
+        returnorders_ender = #{returnordersEnder,jdbcType=BIGINT},
+      </if>
+      <if test="returnordersSupplierId != null" >
+        returnorders_supplier_id = #{returnordersSupplierId,jdbcType=BIGINT},
+      </if>
+      <if test="returnordersTotalmoney != null" >
+        returnorders_totalmoney = #{returnordersTotalmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="returnordersState != null" >
+        returnorders_state = #{returnordersState,jdbcType=CHAR},
+      </if>
+      <if test="returnordersWaybillsn != null" >
+        returnorders_waybillsn = #{returnordersWaybillsn,jdbcType=VARCHAR},
+      </if>
+      <if test="returnordersOrdersId != null" >
+        returnorders_orders_id = #{returnordersOrdersId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where returnorders_id = #{returnordersId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.erp.base.model.Returnorders" >
+    update returnorders
+    set returnorders_createtime = #{returnordersCreatetime,jdbcType=TIMESTAMP},
+      returnorders_checktime = #{returnordersChecktime,jdbcType=TIMESTAMP},
+      returnorders_endtime = #{returnordersEndtime,jdbcType=TIMESTAMP},
+      returnorders_type = #{returnordersType,jdbcType=CHAR},
+      returnorders_creater = #{returnordersCreater,jdbcType=BIGINT},
+      returnorders_checker = #{returnordersChecker,jdbcType=BIGINT},
+      returnorders_ender = #{returnordersEnder,jdbcType=BIGINT},
+      returnorders_supplier_id = #{returnordersSupplierId,jdbcType=BIGINT},
+      returnorders_totalmoney = #{returnordersTotalmoney,jdbcType=DECIMAL},
+      returnorders_state = #{returnordersState,jdbcType=CHAR},
+      returnorders_waybillsn = #{returnordersWaybillsn,jdbcType=VARCHAR},
+      returnorders_orders_id = #{returnordersOrdersId,jdbcType=BIGINT}
+    where returnorders_id = #{returnordersId,jdbcType=BIGINT}
+  </update>
+</mapper>

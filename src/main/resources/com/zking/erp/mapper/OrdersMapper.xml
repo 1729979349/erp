@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.erp.base.mapper.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.erp.base.model.Orders" >
+    <constructor >
+      <idArg column="orders_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="orders_createtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="orders_checktime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="orders_starttime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="orders_endtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="orders_type" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="orders_creater" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="orders_checker" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="orders_starter" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="orders_ender" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="orders_supplier_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="orders_totalmoney" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="orders_state" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="orders_waybillsn" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orders_id, orders_createtime, orders_checktime, orders_starttime, orders_endtime, 
+    orders_type, orders_creater, orders_checker, orders_starter, orders_ender, orders_supplier_id, 
+    orders_totalmoney, orders_state, orders_waybillsn
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where orders_id = #{ordersId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from orders
+    where orders_id = #{ordersId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.erp.base.model.Orders" >
+    insert into orders (orders_id, orders_createtime, orders_checktime, 
+      orders_starttime, orders_endtime, orders_type, 
+      orders_creater, orders_checker, orders_starter, 
+      orders_ender, orders_supplier_id, orders_totalmoney, 
+      orders_state, orders_waybillsn)
+    values (#{ordersId,jdbcType=BIGINT}, #{ordersCreatetime,jdbcType=TIMESTAMP}, #{ordersChecktime,jdbcType=TIMESTAMP}, 
+      #{ordersStarttime,jdbcType=TIMESTAMP}, #{ordersEndtime,jdbcType=TIMESTAMP}, #{ordersType,jdbcType=CHAR}, 
+      #{ordersCreater,jdbcType=BIGINT}, #{ordersChecker,jdbcType=BIGINT}, #{ordersStarter,jdbcType=BIGINT}, 
+      #{ordersEnder,jdbcType=BIGINT}, #{ordersSupplierId,jdbcType=BIGINT}, #{ordersTotalmoney,jdbcType=DECIMAL}, 
+      #{ordersState,jdbcType=CHAR}, #{ordersWaybillsn,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.erp.base.model.Orders" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ordersId != null" >
+        orders_id,
+      </if>
+      <if test="ordersCreatetime != null" >
+        orders_createtime,
+      </if>
+      <if test="ordersChecktime != null" >
+        orders_checktime,
+      </if>
+      <if test="ordersStarttime != null" >
+        orders_starttime,
+      </if>
+      <if test="ordersEndtime != null" >
+        orders_endtime,
+      </if>
+      <if test="ordersType != null" >
+        orders_type,
+      </if>
+      <if test="ordersCreater != null" >
+        orders_creater,
+      </if>
+      <if test="ordersChecker != null" >
+        orders_checker,
+      </if>
+      <if test="ordersStarter != null" >
+        orders_starter,
+      </if>
+      <if test="ordersEnder != null" >
+        orders_ender,
+      </if>
+      <if test="ordersSupplierId != null" >
+        orders_supplier_id,
+      </if>
+      <if test="ordersTotalmoney != null" >
+        orders_totalmoney,
+      </if>
+      <if test="ordersState != null" >
+        orders_state,
+      </if>
+      <if test="ordersWaybillsn != null" >
+        orders_waybillsn,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ordersId != null" >
+        #{ordersId,jdbcType=BIGINT},
+      </if>
+      <if test="ordersCreatetime != null" >
+        #{ordersCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordersChecktime != null" >
+        #{ordersChecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordersStarttime != null" >
+        #{ordersStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordersEndtime != null" >
+        #{ordersEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordersType != null" >
+        #{ordersType,jdbcType=CHAR},
+      </if>
+      <if test="ordersCreater != null" >
+        #{ordersCreater,jdbcType=BIGINT},
+      </if>
+      <if test="ordersChecker != null" >
+        #{ordersChecker,jdbcType=BIGINT},
+      </if>
+      <if test="ordersStarter != null" >
+        #{ordersStarter,jdbcType=BIGINT},
+      </if>
+      <if test="ordersEnder != null" >
+        #{ordersEnder,jdbcType=BIGINT},
+      </if>
+      <if test="ordersSupplierId != null" >
+        #{ordersSupplierId,jdbcType=BIGINT},
+      </if>
+      <if test="ordersTotalmoney != null" >
+        #{ordersTotalmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="ordersState != null" >
+        #{ordersState,jdbcType=CHAR},
+      </if>
+      <if test="ordersWaybillsn != null" >
+        #{ordersWaybillsn,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.erp.base.model.Orders" >
+    update orders
+    <set >
+      <if test="ordersCreatetime != null" >
+        orders_createtime = #{ordersCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordersChecktime != null" >
+        orders_checktime = #{ordersChecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordersStarttime != null" >
+        orders_starttime = #{ordersStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordersEndtime != null" >
+        orders_endtime = #{ordersEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordersType != null" >
+        orders_type = #{ordersType,jdbcType=CHAR},
+      </if>
+      <if test="ordersCreater != null" >
+        orders_creater = #{ordersCreater,jdbcType=BIGINT},
+      </if>
+      <if test="ordersChecker != null" >
+        orders_checker = #{ordersChecker,jdbcType=BIGINT},
+      </if>
+      <if test="ordersStarter != null" >
+        orders_starter = #{ordersStarter,jdbcType=BIGINT},
+      </if>
+      <if test="ordersEnder != null" >
+        orders_ender = #{ordersEnder,jdbcType=BIGINT},
+      </if>
+      <if test="ordersSupplierId != null" >
+        orders_supplier_id = #{ordersSupplierId,jdbcType=BIGINT},
+      </if>
+      <if test="ordersTotalmoney != null" >
+        orders_totalmoney = #{ordersTotalmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="ordersState != null" >
+        orders_state = #{ordersState,jdbcType=CHAR},
+      </if>
+      <if test="ordersWaybillsn != null" >
+        orders_waybillsn = #{ordersWaybillsn,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where orders_id = #{ordersId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.erp.base.model.Orders" >
+    update orders
+    set orders_createtime = #{ordersCreatetime,jdbcType=TIMESTAMP},
+      orders_checktime = #{ordersChecktime,jdbcType=TIMESTAMP},
+      orders_starttime = #{ordersStarttime,jdbcType=TIMESTAMP},
+      orders_endtime = #{ordersEndtime,jdbcType=TIMESTAMP},
+      orders_type = #{ordersType,jdbcType=CHAR},
+      orders_creater = #{ordersCreater,jdbcType=BIGINT},
+      orders_checker = #{ordersChecker,jdbcType=BIGINT},
+      orders_starter = #{ordersStarter,jdbcType=BIGINT},
+      orders_ender = #{ordersEnder,jdbcType=BIGINT},
+      orders_supplier_id = #{ordersSupplierId,jdbcType=BIGINT},
+      orders_totalmoney = #{ordersTotalmoney,jdbcType=DECIMAL},
+      orders_state = #{ordersState,jdbcType=CHAR},
+      orders_waybillsn = #{ordersWaybillsn,jdbcType=VARCHAR}
+    where orders_id = #{ordersId,jdbcType=BIGINT}
+  </update>
+</mapper>

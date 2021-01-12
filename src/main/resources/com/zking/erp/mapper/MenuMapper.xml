@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.erp.base.mapper.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.erp.base.model.Menu" >
+    <constructor >
+      <idArg column="menu_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="menu_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="menu_icon" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="menu_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="menu_pid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="menu_function" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    menu_id, menu_name, menu_icon, menu_url, menu_pid, menu_function
+  </sql>
+  <sql id="menu" >
+   select menu_id, menu_name, menu_icon, menu_url, menu_pid, menu_function from menu
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from menu
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </select>
+    <select id="queryMenuList" resultType="com.zking.erp.base.model.Menu">
+      <include refid="menu"/> where menu_pid=#{pid}
+       </select>
+  <select id="queryMenuByIdList" resultType="com.zking.erp.base.model.Menu">
+    <include refid="menu"/> where menu_pid=#{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from menu
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zking.erp.base.model.Menu" >
+    insert into menu (menu_id, menu_name, menu_icon, 
+      menu_url, menu_pid, menu_function
+      )
+    values (#{menuId,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{menuIcon,jdbcType=VARCHAR}, 
+      #{menuUrl,jdbcType=VARCHAR}, #{menuPid,jdbcType=VARCHAR}, #{menuFunction,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.erp.base.model.Menu" >
+    insert into menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        menu_id,
+      </if>
+      <if test="menuName != null" >
+        menu_name,
+      </if>
+      <if test="menuIcon != null" >
+        menu_icon,
+      </if>
+      <if test="menuUrl != null" >
+        menu_url,
+      </if>
+      <if test="menuPid != null" >
+        menu_pid,
+      </if>
+      <if test="menuFunction != null" >
+        menu_function,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null" >
+        #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPid != null" >
+        #{menuPid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuFunction != null" >
+        #{menuFunction,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.erp.base.model.Menu" >
+    update menu
+    <set >
+      <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null" >
+        menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPid != null" >
+        menu_pid = #{menuPid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuFunction != null" >
+        menu_function = #{menuFunction,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.erp.base.model.Menu" >
+    update menu
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
+      menu_pid = #{menuPid,jdbcType=VARCHAR},
+      menu_function = #{menuFunction,jdbcType=VARCHAR}
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+</mapper>

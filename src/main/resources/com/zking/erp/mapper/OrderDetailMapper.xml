@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.erp.base.mapper.OrderDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.erp.base.model.OrderDetail" >
+    <constructor >
+      <idArg column="orderdetail_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="orderdetail_goods_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="orderdetail_goodsname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="orderdetail_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="orderdetail_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="orderdetail_money" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="orderdetail_endtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="orderdetail_ender" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="orderdetail_store_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="orderdetail_state" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="orderdetail_orders_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orderdetail_id, orderdetail_goods_id, orderdetail_goodsname, orderdetail_price, orderdetail_num, 
+    orderdetail_money, orderdetail_endtime, orderdetail_ender, orderdetail_store_id, 
+    orderdetail_state, orderdetail_orders_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from orderdetail
+    where orderdetail_id = #{orderdetailId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from orderdetail
+    where orderdetail_id = #{orderdetailId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.erp.base.model.OrderDetail" >
+    insert into orderdetail (orderdetail_id, orderdetail_goods_id, 
+      orderdetail_goodsname, orderdetail_price, 
+      orderdetail_num, orderdetail_money, orderdetail_endtime, 
+      orderdetail_ender, orderdetail_store_id, orderdetail_state, 
+      orderdetail_orders_id)
+    values (#{orderdetailId,jdbcType=BIGINT}, #{orderdetailGoodsId,jdbcType=BIGINT}, 
+      #{orderdetailGoodsname,jdbcType=VARCHAR}, #{orderdetailPrice,jdbcType=DECIMAL}, 
+      #{orderdetailNum,jdbcType=INTEGER}, #{orderdetailMoney,jdbcType=DECIMAL}, #{orderdetailEndtime,jdbcType=TIMESTAMP}, 
+      #{orderdetailEnder,jdbcType=BIGINT}, #{orderdetailStoreId,jdbcType=BIGINT}, #{orderdetailState,jdbcType=CHAR}, 
+      #{orderdetailOrdersId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.erp.base.model.OrderDetail" >
+    insert into orderdetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderdetailId != null" >
+        orderdetail_id,
+      </if>
+      <if test="orderdetailGoodsId != null" >
+        orderdetail_goods_id,
+      </if>
+      <if test="orderdetailGoodsname != null" >
+        orderdetail_goodsname,
+      </if>
+      <if test="orderdetailPrice != null" >
+        orderdetail_price,
+      </if>
+      <if test="orderdetailNum != null" >
+        orderdetail_num,
+      </if>
+      <if test="orderdetailMoney != null" >
+        orderdetail_money,
+      </if>
+      <if test="orderdetailEndtime != null" >
+        orderdetail_endtime,
+      </if>
+      <if test="orderdetailEnder != null" >
+        orderdetail_ender,
+      </if>
+      <if test="orderdetailStoreId != null" >
+        orderdetail_store_id,
+      </if>
+      <if test="orderdetailState != null" >
+        orderdetail_state,
+      </if>
+      <if test="orderdetailOrdersId != null" >
+        orderdetail_orders_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderdetailId != null" >
+        #{orderdetailId,jdbcType=BIGINT},
+      </if>
+      <if test="orderdetailGoodsId != null" >
+        #{orderdetailGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="orderdetailGoodsname != null" >
+        #{orderdetailGoodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdetailPrice != null" >
+        #{orderdetailPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderdetailNum != null" >
+        #{orderdetailNum,jdbcType=INTEGER},
+      </if>
+      <if test="orderdetailMoney != null" >
+        #{orderdetailMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="orderdetailEndtime != null" >
+        #{orderdetailEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderdetailEnder != null" >
+        #{orderdetailEnder,jdbcType=BIGINT},
+      </if>
+      <if test="orderdetailStoreId != null" >
+        #{orderdetailStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="orderdetailState != null" >
+        #{orderdetailState,jdbcType=CHAR},
+      </if>
+      <if test="orderdetailOrdersId != null" >
+        #{orderdetailOrdersId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.erp.base.model.OrderDetail" >
+    update orderdetail
+    <set >
+      <if test="orderdetailGoodsId != null" >
+        orderdetail_goods_id = #{orderdetailGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="orderdetailGoodsname != null" >
+        orderdetail_goodsname = #{orderdetailGoodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdetailPrice != null" >
+        orderdetail_price = #{orderdetailPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderdetailNum != null" >
+        orderdetail_num = #{orderdetailNum,jdbcType=INTEGER},
+      </if>
+      <if test="orderdetailMoney != null" >
+        orderdetail_money = #{orderdetailMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="orderdetailEndtime != null" >
+        orderdetail_endtime = #{orderdetailEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderdetailEnder != null" >
+        orderdetail_ender = #{orderdetailEnder,jdbcType=BIGINT},
+      </if>
+      <if test="orderdetailStoreId != null" >
+        orderdetail_store_id = #{orderdetailStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="orderdetailState != null" >
+        orderdetail_state = #{orderdetailState,jdbcType=CHAR},
+      </if>
+      <if test="orderdetailOrdersId != null" >
+        orderdetail_orders_id = #{orderdetailOrdersId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where orderdetail_id = #{orderdetailId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.erp.base.model.OrderDetail" >
+    update orderdetail
+    set orderdetail_goods_id = #{orderdetailGoodsId,jdbcType=BIGINT},
+      orderdetail_goodsname = #{orderdetailGoodsname,jdbcType=VARCHAR},
+      orderdetail_price = #{orderdetailPrice,jdbcType=DECIMAL},
+      orderdetail_num = #{orderdetailNum,jdbcType=INTEGER},
+      orderdetail_money = #{orderdetailMoney,jdbcType=DECIMAL},
+      orderdetail_endtime = #{orderdetailEndtime,jdbcType=TIMESTAMP},
+      orderdetail_ender = #{orderdetailEnder,jdbcType=BIGINT},
+      orderdetail_store_id = #{orderdetailStoreId,jdbcType=BIGINT},
+      orderdetail_state = #{orderdetailState,jdbcType=CHAR},
+      orderdetail_orders_id = #{orderdetailOrdersId,jdbcType=BIGINT}
+    where orderdetail_id = #{orderdetailId,jdbcType=BIGINT}
+  </update>
+</mapper>

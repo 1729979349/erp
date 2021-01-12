@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.erp.base.mapper.StoreDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.erp.base.model.StoreDetail" >
+    <constructor >
+      <idArg column="storedetail_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="storedetail_store_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="storedetail_goods_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="storedetail_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    storedetail_id, storedetail_store_id, storedetail_goods_id, storedetail_num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from storedetail
+    where storedetail_id = #{storedetailId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from storedetail
+    where storedetail_id = #{storedetailId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.erp.base.model.StoreDetail" >
+    insert into storedetail (storedetail_id, storedetail_store_id, 
+      storedetail_goods_id, storedetail_num)
+    values (#{storedetailId,jdbcType=BIGINT}, #{storedetailStoreId,jdbcType=BIGINT}, 
+      #{storedetailGoodsId,jdbcType=BIGINT}, #{storedetailNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.erp.base.model.StoreDetail" >
+    insert into storedetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="storedetailId != null" >
+        storedetail_id,
+      </if>
+      <if test="storedetailStoreId != null" >
+        storedetail_store_id,
+      </if>
+      <if test="storedetailGoodsId != null" >
+        storedetail_goods_id,
+      </if>
+      <if test="storedetailNum != null" >
+        storedetail_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="storedetailId != null" >
+        #{storedetailId,jdbcType=BIGINT},
+      </if>
+      <if test="storedetailStoreId != null" >
+        #{storedetailStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="storedetailGoodsId != null" >
+        #{storedetailGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="storedetailNum != null" >
+        #{storedetailNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.erp.base.model.StoreDetail" >
+    update storedetail
+    <set >
+      <if test="storedetailStoreId != null" >
+        storedetail_store_id = #{storedetailStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="storedetailGoodsId != null" >
+        storedetail_goods_id = #{storedetailGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="storedetailNum != null" >
+        storedetail_num = #{storedetailNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where storedetail_id = #{storedetailId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.erp.base.model.StoreDetail" >
+    update storedetail
+    set storedetail_store_id = #{storedetailStoreId,jdbcType=BIGINT},
+      storedetail_goods_id = #{storedetailGoodsId,jdbcType=BIGINT},
+      storedetail_num = #{storedetailNum,jdbcType=INTEGER}
+    where storedetail_id = #{storedetailId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.erp.base.mapper.InventoryMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.erp.base.model.Inventory" >
+    <constructor >
+      <idArg column="inventory_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="inventory_goods_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="inventory_store_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="inventory_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="inventory_type" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="inventory_createtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="inventory_checktime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="inventory_creater" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="inventory_checker" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="inventory_state" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="inventory_remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    inventory_id, inventory_goods_id, inventory_store_id, inventory_num, inventory_type, 
+    inventory_createtime, inventory_checktime, inventory_creater, inventory_checker, 
+    inventory_state, inventory_remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from inventory
+    where inventory_id = #{inventoryId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from inventory
+    where inventory_id = #{inventoryId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zking.erp.base.model.Inventory" >
+    insert into inventory (inventory_id, inventory_goods_id, inventory_store_id, 
+      inventory_num, inventory_type, inventory_createtime, 
+      inventory_checktime, inventory_creater, 
+      inventory_checker, inventory_state, inventory_remark
+      )
+    values (#{inventoryId,jdbcType=BIGINT}, #{inventoryGoodsId,jdbcType=BIGINT}, #{inventoryStoreId,jdbcType=BIGINT}, 
+      #{inventoryNum,jdbcType=INTEGER}, #{inventoryType,jdbcType=CHAR}, #{inventoryCreatetime,jdbcType=TIMESTAMP}, 
+      #{inventoryChecktime,jdbcType=TIMESTAMP}, #{inventoryCreater,jdbcType=BIGINT}, 
+      #{inventoryChecker,jdbcType=BIGINT}, #{inventoryState,jdbcType=CHAR}, #{inventoryRemark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.erp.base.model.Inventory" >
+    insert into inventory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="inventoryId != null" >
+        inventory_id,
+      </if>
+      <if test="inventoryGoodsId != null" >
+        inventory_goods_id,
+      </if>
+      <if test="inventoryStoreId != null" >
+        inventory_store_id,
+      </if>
+      <if test="inventoryNum != null" >
+        inventory_num,
+      </if>
+      <if test="inventoryType != null" >
+        inventory_type,
+      </if>
+      <if test="inventoryCreatetime != null" >
+        inventory_createtime,
+      </if>
+      <if test="inventoryChecktime != null" >
+        inventory_checktime,
+      </if>
+      <if test="inventoryCreater != null" >
+        inventory_creater,
+      </if>
+      <if test="inventoryChecker != null" >
+        inventory_checker,
+      </if>
+      <if test="inventoryState != null" >
+        inventory_state,
+      </if>
+      <if test="inventoryRemark != null" >
+        inventory_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="inventoryId != null" >
+        #{inventoryId,jdbcType=BIGINT},
+      </if>
+      <if test="inventoryGoodsId != null" >
+        #{inventoryGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="inventoryStoreId != null" >
+        #{inventoryStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="inventoryNum != null" >
+        #{inventoryNum,jdbcType=INTEGER},
+      </if>
+      <if test="inventoryType != null" >
+        #{inventoryType,jdbcType=CHAR},
+      </if>
+      <if test="inventoryCreatetime != null" >
+        #{inventoryCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inventoryChecktime != null" >
+        #{inventoryChecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inventoryCreater != null" >
+        #{inventoryCreater,jdbcType=BIGINT},
+      </if>
+      <if test="inventoryChecker != null" >
+        #{inventoryChecker,jdbcType=BIGINT},
+      </if>
+      <if test="inventoryState != null" >
+        #{inventoryState,jdbcType=CHAR},
+      </if>
+      <if test="inventoryRemark != null" >
+        #{inventoryRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.erp.base.model.Inventory" >
+    update inventory
+    <set >
+      <if test="inventoryGoodsId != null" >
+        inventory_goods_id = #{inventoryGoodsId,jdbcType=BIGINT},
+      </if>
+      <if test="inventoryStoreId != null" >
+        inventory_store_id = #{inventoryStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="inventoryNum != null" >
+        inventory_num = #{inventoryNum,jdbcType=INTEGER},
+      </if>
+      <if test="inventoryType != null" >
+        inventory_type = #{inventoryType,jdbcType=CHAR},
+      </if>
+      <if test="inventoryCreatetime != null" >
+        inventory_createtime = #{inventoryCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inventoryChecktime != null" >
+        inventory_checktime = #{inventoryChecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inventoryCreater != null" >
+        inventory_creater = #{inventoryCreater,jdbcType=BIGINT},
+      </if>
+      <if test="inventoryChecker != null" >
+        inventory_checker = #{inventoryChecker,jdbcType=BIGINT},
+      </if>
+      <if test="inventoryState != null" >
+        inventory_state = #{inventoryState,jdbcType=CHAR},
+      </if>
+      <if test="inventoryRemark != null" >
+        inventory_remark = #{inventoryRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where inventory_id = #{inventoryId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.erp.base.model.Inventory" >
+    update inventory
+    set inventory_goods_id = #{inventoryGoodsId,jdbcType=BIGINT},
+      inventory_store_id = #{inventoryStoreId,jdbcType=BIGINT},
+      inventory_num = #{inventoryNum,jdbcType=INTEGER},
+      inventory_type = #{inventoryType,jdbcType=CHAR},
+      inventory_createtime = #{inventoryCreatetime,jdbcType=TIMESTAMP},
+      inventory_checktime = #{inventoryChecktime,jdbcType=TIMESTAMP},
+      inventory_creater = #{inventoryCreater,jdbcType=BIGINT},
+      inventory_checker = #{inventoryChecker,jdbcType=BIGINT},
+      inventory_state = #{inventoryState,jdbcType=CHAR},
+      inventory_remark = #{inventoryRemark,jdbcType=VARCHAR}
+    where inventory_id = #{inventoryId,jdbcType=BIGINT}
+  </update>
+</mapper>
