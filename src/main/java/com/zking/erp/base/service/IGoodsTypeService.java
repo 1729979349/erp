@@ -1,19 +1,43 @@
 package com.zking.erp.base.service;
 
 import com.zking.erp.base.model.GoodsType;
-import org.springframework.stereotype.Repository;
+import com.zking.erp.base.utils.JsonResponseBody;
+import com.zking.erp.base.utils.PageBean;
 
 
 public interface IGoodsTypeService {
-    int deleteByPrimaryKey(Long goodstypeId);
+    /**
+     * 删除商品类型
+     * @param goodstypeId
+     * @return
+     */
+    JsonResponseBody<?> deleteByPrimaryKey(Long goodstypeId);
 
-    int insert(GoodsType record);
+    /**
+     * 添加商品类型
+     * @param record
+     * @return
+     */
+    JsonResponseBody<?> insert(GoodsType record);
 
-    int insertSelective(GoodsType record);
+    /**
+     * 通过ID查询某一条数据
+     * @param goodstypeName
+     * @return
+     */
+    JsonResponseBody<?> selectByPrimaryKey(String goodstypeName);
 
-    GoodsType selectByPrimaryKey(Long goodstypeId);
+    /**
+     * 修改某条数据信息
+     * @param record
+     * @return
+     */
+    JsonResponseBody<?> updateByPrimaryKey(GoodsType record);
 
-    int updateByPrimaryKeySelective(GoodsType record);
-
-    int updateByPrimaryKey(GoodsType record);
+    /**
+     * 分页查询商品类型
+     * @param goodsType
+     * @return
+     */
+    JsonResponseBody<?> queryGoodsPagePager(GoodsType goodsType, PageBean pageBean);
 }

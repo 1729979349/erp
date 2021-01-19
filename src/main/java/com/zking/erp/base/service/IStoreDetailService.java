@@ -1,18 +1,37 @@
 package com.zking.erp.base.service;
 
 import com.zking.erp.base.model.StoreDetail;
+import com.zking.erp.base.utils.JsonResponseBody;
+import com.zking.erp.base.utils.PageBean;
+import com.zking.erp.base.vo.StoreDetailVo;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Map;
+
 public interface IStoreDetailService {
-    int deleteByPrimaryKey(Long storedetailId);
+    JsonResponseBody<?> deleteByPrimaryKey(Long storedetailId);
 
-    int insert(StoreDetail record);
+    JsonResponseBody<?> insert(StoreDetail record);
 
-    int insertSelective(StoreDetail record);
+    JsonResponseBody<?> insertSelective(StoreDetail record);
 
-    StoreDetail selectByPrimaryKey(Long storedetailId);
+    JsonResponseBody<?> selectByPrimaryKey(Long storedetailId);
 
-    int updateByPrimaryKeySelective(StoreDetail record);
+    JsonResponseBody<?> updateByPrimaryKeySelective(StoreDetail record);
 
-    int updateByPrimaryKey(StoreDetail record);
+    JsonResponseBody<?> updateByPrimaryKey(StoreDetail record);
+
+//    JsonResponseBody<?> selectAllPager(StoreDetail record, PageBean pageBean);
+
+    JsonResponseBody<?> selectAllPager(StoreDetail record,PageBean pageBean);
+
+    JsonResponseBody<?> selectAPager(StoreDetailVo storeDetailVo, PageBean pageBean);
+
+    /**
+     * 分页查询库存预警
+     * @param pageBean
+     * @return
+     */
+    JsonResponseBody<?> selectWarningPager(StoreDetailVo storeDetailVo,PageBean pageBean);
 }

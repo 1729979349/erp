@@ -1,5 +1,7 @@
 package com.zking.erp.base.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Inventory {
@@ -13,8 +15,10 @@ public class Inventory {
 
     private String inventoryType;
 
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date inventoryCreatetime;
 
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date inventoryChecktime;
 
     private Long inventoryCreater;
@@ -129,5 +133,22 @@ public class Inventory {
 
     public void setInventoryRemark(String inventoryRemark) {
         this.inventoryRemark = inventoryRemark;
+    }
+
+    @Override
+    public String toString() {
+        return "Inventory{" +
+                "inventoryId=" + inventoryId +
+                ", inventoryGoodsId=" + inventoryGoodsId +
+                ", inventoryStoreId=" + inventoryStoreId +
+                ", inventoryNum=" + inventoryNum +
+                ", inventoryType='" + inventoryType + '\'' +
+                ", inventoryCreatetime=" + inventoryCreatetime +
+                ", inventoryChecktime=" + inventoryChecktime +
+                ", inventoryCreater=" + inventoryCreater +
+                ", inventoryChecker=" + inventoryChecker +
+                ", inventoryState='" + inventoryState + '\'' +
+                ", inventoryRemark='" + inventoryRemark + '\'' +
+                '}';
     }
 }

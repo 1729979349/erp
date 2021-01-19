@@ -1,18 +1,44 @@
 package com.zking.erp.base.service;
 
 import com.zking.erp.base.model.Store;
-import org.springframework.stereotype.Repository;
+import com.zking.erp.base.utils.JsonResponseBody;
+import com.zking.erp.base.utils.PageBean;
 
 public interface IStoreService {
-    int deleteByPrimaryKey(Long storeId);
+    /**
+     *删除仓库信息
+     * @param storeId
+     * @return
+     */
+    JsonResponseBody<?> deleteByPrimaryKey(Long storeId);
 
-    int insert(Store record);
+    /**
+     *添加仓库信息
+     * @param record
+     * @return
+     */
+    JsonResponseBody<?> insert(Store record);
 
-    int insertSelective(Store record);
+    /**
+     *根据仓库名查询单个商品信息
+     * @param
+     * @return
+     */
+    JsonResponseBody<?> selectByPrimaryKey(String storeName);
 
-    Store selectByPrimaryKey(Long storeId);
+    /**
+     *修改仓库信息
+     * @param record
+     * @return
+     */
+    JsonResponseBody<?> updateByPrimaryKey(Store record);
 
-    int updateByPrimaryKeySelective(Store record);
+    /**
+     * 分页查询仓库信息
+     * @param store
+     * @return
+     */
+    JsonResponseBody<?> queryStorerPager(Store store, PageBean pageBean);
 
-    int updateByPrimaryKey(Store record);
+
 }
