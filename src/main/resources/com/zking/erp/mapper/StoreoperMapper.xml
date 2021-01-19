@@ -22,7 +22,31 @@
     from storeoper
     where storeoper_id = #{storeoperId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <select id="selectAllPager" resultType="java.util.Map">
+      select d.storeoper_id as storeoperId,a.emp_name as empName, DATE_FORMAT(d.storeoper_opertime, '%Y-%m-%d')as storeoperOpertime,b.store_name as storeName,c.goods_name as goodsName,d.storeoper_num as storeoperNum,(CASE WHEN d.storeoper_type = 0 THEN '入库' WHEN d.storeoper_type = 1 THEN '出库' END) as storeoperType from
+emp as a,store as b,goods as c,storeoper as d where
+a.emp_id=d.storeoper_emp_id and b.store_id = d.storeoper_store_id and c.goods_id=d.storeoper_goods_id
+      <if test="storeoperStoreId!=null and ''!=storeoperStoreId">
+        and d.storeoper_store_id=#{storeoperStoreId}
+      </if>
+      <if test="storeoperGoodsId!=null and ''!=storeoperGoodsId">
+        and d.storeoper_goods_id=#{storeoperGoodsId}
+      </if>
+      <if test="storeoperEmpId!=null and ''!=storeoperEmpId">
+        and d.storeoper_emp_id=#{storeoperEmpId}
+      </if>
+      <if test="storeoperType!=null and ''!=storeoperType">
+        and d.storeoper_type=#{storeoperType}
+      </if>
+      <if test="StartTime!=null and StartTime!=''">
+        AND  d.storeoper_opertime &gt;=str_to_date(#{StartTime},'%Y-%m-%d %H:%i:%S')
+      </if>
+      <if test="EndTime!=null and EndTime!=''">
+        AND  d.storeoper_opertime &lt;=str_to_date(#{EndTime},'%Y-%m-%d %H:%i:%S')
+      </if>
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from storeoper
     where storeoper_id = #{storeoperId,jdbcType=BIGINT}
   </delete>
@@ -37,9 +61,6 @@
   <insert id="insertSelective" parameterType="com.zking.erp.base.model.Storeoper" >
     insert into storeoper
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="storeoperId != null" >
-        storeoper_id,
-      </if>
       <if test="storeoperEmpId != null" >
         storeoper_emp_id,
       </if>
@@ -60,9 +81,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="storeoperId != null" >
-        #{storeoperId,jdbcType=BIGINT},
-      </if>
       <if test="storeoperEmpId != null" >
         #{storeoperEmpId,jdbcType=BIGINT},
       </if>
@@ -117,4 +135,23 @@
       storeoper_type = #{storeoperType,jdbcType=CHAR}
     where storeoper_id = #{storeoperId,jdbcType=BIGINT}
   </update>
+    <update id="updateStoreoperStoreIdAndStoreoperGoodsId">
+      update storeoper
+      <set >
+        <if test="storeoperEmpId != null" >
+          storeoper_emp_id = #{storeoperEmpId,jdbcType=BIGINT},
+        </if>
+        <if test="storeoperOpertime != null" >
+          storeoper_opertime = #{storeoperOpertime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="storeoperNum != null" >
+          storeoper_num = #{storeoperNum,jdbcType=INTEGER},
+        </if>
+        <if test="storeoperType != null" >
+          storeoper_type = #{storeoperType,jdbcType=CHAR},
+        </if>
+      </set>
+      where storeoper_store_id = #{storeoperStoreId,jdbcType=BIGINT} and   storeoper_goods_id = #{storeoperGoodsId,jdbcType=BIGINT}
+
+    </update>
 </mapper>

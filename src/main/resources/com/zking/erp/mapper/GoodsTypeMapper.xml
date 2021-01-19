@@ -10,48 +10,27 @@
   <sql id="Base_Column_List" >
     goodstype_id, goodstype_name
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from goodstype
-    where goodstype_id = #{goodstypeId,jdbcType=BIGINT}
+    where goodstype_name = #{goodstypeName}
+  </select>
+  <select id="queryGoodsPagePager" resultType="com.zking.erp.base.model.GoodsType">
+    select <include refid="Base_Column_List"/> from goodstype where 1=1
+    <if test="null!=goodstypeName and ''!=goodstypeName ">
+      and goodstype_name like concat('%',#{goodstypeName},'%')
+    </if>
+    order by goodstype_id desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from goodstype
     where goodstype_id = #{goodstypeId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.zking.erp.base.model.GoodsType" >
-    insert into goodstype (goodstype_id, goodstype_name)
-    values (#{goodstypeId,jdbcType=BIGINT}, #{goodstypeName,jdbcType=VARCHAR})
+    insert into goodstype ( goodstype_name)
+    values ( #{goodstypeName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zking.erp.base.model.GoodsType" >
-    insert into goodstype
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="goodstypeId != null" >
-        goodstype_id,
-      </if>
-      <if test="goodstypeName != null" >
-        goodstype_name,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="goodstypeId != null" >
-        #{goodstypeId,jdbcType=BIGINT},
-      </if>
-      <if test="goodstypeName != null" >
-        #{goodstypeName,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zking.erp.base.model.GoodsType" >
-    update goodstype
-    <set >
-      <if test="goodstypeName != null" >
-        goodstype_name = #{goodstypeName,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where goodstype_id = #{goodstypeId,jdbcType=BIGINT}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.zking.erp.base.model.GoodsType" >
     update goodstype
     set goodstype_name = #{goodstypeName,jdbcType=VARCHAR}

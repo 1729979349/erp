@@ -27,20 +27,49 @@
     from inventory
     where inventory_id = #{inventoryId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <select id="selectInPager" resultType="java.util.Map">
+      select f.*,e.emp_name as name from(select  a.inventory_id,a.inventory_goods_id,a.inventory_store_id,a.inventory_num,a.inventory_type,str_to_date(a.inventory_createtime,'%Y-%m-%d %H:%i:%s') as aa,str_to_date(a.inventory_checktime,'%Y-%m-%d %H:%i:%s') as bb,a.inventory_creater,a.inventory_checker,a.inventory_state,a.inventory_remark,b.goods_name,c.store_name,d.emp_name from inventory a,goods b,store c,emp d
+ where a.inventory_goods_id=b.goods_id and a.inventory_store_id=c.store_id and a.inventory_creater=d.emp_id)f
+ left join emp e on  f.inventory_checker=e.emp_id where 1=1
+
+      <if test="inventoryState!=null and inventoryState!=''">
+        and f.inventory_state=#{inventoryState}
+      </if>
+
+      <if test="inventoryCreater!=null and inventoryCreater!=''">
+        and f.inventory_creater=#{inventoryCreater}
+      </if>
+ <if test="inventoryType!=null and inventoryType!=''">
+   and f.inventory_type=#{inventoryType}
+ </if>
+ <if test="statusinventoryCreatetime!='' and statusinventoryCreatetime!=null ">
+  and f.aa &gt;=#{statusinventoryCreatetime}
+ </if>
+ <if test="endinventoryChecktime!='' and endinventoryChecktime!=null">
+        and f.aa &lt;=#{endinventoryChecktime}
+ </if>
+
+      <if test="statusinventoryCreatetime2!='' and statusinventoryCreatetime2!=null ">
+        and f.bb &gt;=#{statusinventoryCreatetime2}
+      </if>
+      <if test="endinventoryChecktime2!='' and endinventoryChecktime2!=null">
+        and f.bb &lt;=#{endinventoryChecktime2}
+      </if>
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from inventory
     where inventory_id = #{inventoryId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.zking.erp.base.model.Inventory" >
-    insert into inventory (inventory_id, inventory_goods_id, inventory_store_id, 
+    insert into inventory (inventory_goods_id, inventory_store_id,
       inventory_num, inventory_type, inventory_createtime, 
-      inventory_checktime, inventory_creater, 
-      inventory_checker, inventory_state, inventory_remark
+       inventory_creater,inventory_state, inventory_remark
       )
-    values (#{inventoryId,jdbcType=BIGINT}, #{inventoryGoodsId,jdbcType=BIGINT}, #{inventoryStoreId,jdbcType=BIGINT}, 
+    values ( #{inventoryGoodsId,jdbcType=BIGINT}, #{inventoryStoreId,jdbcType=BIGINT},
       #{inventoryNum,jdbcType=INTEGER}, #{inventoryType,jdbcType=CHAR}, #{inventoryCreatetime,jdbcType=TIMESTAMP}, 
-      #{inventoryChecktime,jdbcType=TIMESTAMP}, #{inventoryCreater,jdbcType=BIGINT}, 
-      #{inventoryChecker,jdbcType=BIGINT}, #{inventoryState,jdbcType=CHAR}, #{inventoryRemark,jdbcType=VARCHAR}
+      #{inventoryCreater,jdbcType=BIGINT}, #{inventoryState,jdbcType=CHAR}, #{inventoryRemark,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zking.erp.base.model.Inventory" >

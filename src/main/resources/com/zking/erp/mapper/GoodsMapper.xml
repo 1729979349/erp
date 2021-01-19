@@ -17,106 +17,40 @@
     goods_id, goods_name, goods_origin, goods_producer, goods_unit, goods_inprice, goods_outprice, 
     goods_goodstype_id
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from goods
-    where goods_id = #{goodsId,jdbcType=BIGINT}
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select <include refid="Base_Column_List" /> from goods
+    where goods_name = #{goodsName}
+  </select>
+  <select id="queryGoodsPager" resultType="java.util.Map">
+    select g.goods_id as goodsId,g.goods_name as goodsName,g.goods_origin as goodsOrigin,g.goods_producer as goodsProducer,g.goods_unit as goodsUnit,
+    g.goods_inprice as goodsInprice,g.goods_outprice as goodsOutprice,g.goods_goodstype_id as goodsGoodstypeId,t.goodstype_name as goodstypeName
+    from goods g,goodstype t where g.goods_goodstype_id=t.goodstype_id
+    <if test="null!=goodsName and ''!=goodsName ">
+      and goods_name like concat('%',#{goodsName},'%')
+    </if>
+    <if test="null!=goodsOrigin and ''!=goodsOrigin ">
+      and goods_origin like concat('%',#{goodsOrigin},'%')
+    </if>
+    <if test="null!=goodsProducer and ''!=goodsProducer ">
+      and goods_producer like concat('%',#{goodsProducer},'%')
+    </if>
+    <if test="null!=goodsGoodstypeId and ''!=goodsGoodstypeId ">
+      and goods_goodstype_id like concat('%',#{goodsGoodstypeId},'%')
+    </if>
+    order by goods_id desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from goods
     where goods_id = #{goodsId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.zking.erp.base.model.Goods" >
-    insert into goods (goods_id, goods_name, goods_origin, 
+    insert into goods ( goods_name, goods_origin,
       goods_producer, goods_unit, goods_inprice, 
       goods_outprice, goods_goodstype_id)
-    values (#{goodsId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}, #{goodsOrigin,jdbcType=VARCHAR}, 
+    values ( #{goodsName,jdbcType=VARCHAR}, #{goodsOrigin,jdbcType=VARCHAR},
       #{goodsProducer,jdbcType=VARCHAR}, #{goodsUnit,jdbcType=VARCHAR}, #{goodsInprice,jdbcType=DECIMAL}, 
       #{goodsOutprice,jdbcType=DECIMAL}, #{goodsGoodstypeId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.zking.erp.base.model.Goods" >
-    insert into goods
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="goodsId != null" >
-        goods_id,
-      </if>
-      <if test="goodsName != null" >
-        goods_name,
-      </if>
-      <if test="goodsOrigin != null" >
-        goods_origin,
-      </if>
-      <if test="goodsProducer != null" >
-        goods_producer,
-      </if>
-      <if test="goodsUnit != null" >
-        goods_unit,
-      </if>
-      <if test="goodsInprice != null" >
-        goods_inprice,
-      </if>
-      <if test="goodsOutprice != null" >
-        goods_outprice,
-      </if>
-      <if test="goodsGoodstypeId != null" >
-        goods_goodstype_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="goodsId != null" >
-        #{goodsId,jdbcType=BIGINT},
-      </if>
-      <if test="goodsName != null" >
-        #{goodsName,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsOrigin != null" >
-        #{goodsOrigin,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsProducer != null" >
-        #{goodsProducer,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsUnit != null" >
-        #{goodsUnit,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsInprice != null" >
-        #{goodsInprice,jdbcType=DECIMAL},
-      </if>
-      <if test="goodsOutprice != null" >
-        #{goodsOutprice,jdbcType=DECIMAL},
-      </if>
-      <if test="goodsGoodstypeId != null" >
-        #{goodsGoodstypeId,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zking.erp.base.model.Goods" >
-    update goods
-    <set >
-      <if test="goodsName != null" >
-        goods_name = #{goodsName,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsOrigin != null" >
-        goods_origin = #{goodsOrigin,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsProducer != null" >
-        goods_producer = #{goodsProducer,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsUnit != null" >
-        goods_unit = #{goodsUnit,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsInprice != null" >
-        goods_inprice = #{goodsInprice,jdbcType=DECIMAL},
-      </if>
-      <if test="goodsOutprice != null" >
-        goods_outprice = #{goodsOutprice,jdbcType=DECIMAL},
-      </if>
-      <if test="goodsGoodstypeId != null" >
-        goods_goodstype_id = #{goodsGoodstypeId,jdbcType=BIGINT},
-      </if>
-    </set>
-    where goods_id = #{goodsId,jdbcType=BIGINT}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.zking.erp.base.model.Goods" >
     update goods
     set goods_name = #{goodsName,jdbcType=VARCHAR},

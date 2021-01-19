@@ -16,97 +16,62 @@
     supplier_id, supplier_name, supplier_address, supplier_contact, supplier_tele, supplier_email, 
     supplier_type
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from supplier
-    where supplier_id = #{supplierId,jdbcType=BIGINT}
+    where supplier_name = #{supplierName}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <select id="querySupplierPager" resultType="com.zking.erp.base.model.Supplier">
+      select <include refid="Base_Column_List"/> from supplier where supplier_type=0
+      <if test="null!=supplierName and ''!=supplierName ">
+        and supplier_name like concat('%',#{supplierName},'%')
+      </if>
+      <if test="null!=supplierAddress and ''!=supplierAddress ">
+        and supplier_address like concat('%',#{supplierAddress},'%')
+      </if>
+      <if test="null!=supplierContact and ''!=supplierContact ">
+        and supplier_contact like concat('%',#{supplierContact},'%')
+      </if>
+      <if test="null!=supplierTele and ''!=supplierTele ">
+        and supplier_tele like concat('%',#{supplierTele},'%')
+      </if>
+      <if test="null!=supplierEmail and ''!=supplierEmail ">
+        and supplier_email like concat('%',#{supplierEmail},'%')
+      </if>
+      order by supplier_id desc
+    </select>
+    <select id="queryCustomerPager" resultType="com.zking.erp.base.model.Supplier">
+      select <include refid="Base_Column_List"/> from supplier where supplier_type=1
+      <if test="null!=supplierName and ''!=supplierName ">
+        and supplier_name like concat('%',#{supplierName},'%')
+      </if>
+      <if test="null!=supplierAddress and ''!=supplierAddress ">
+        and supplier_address like concat('%',#{supplierAddress},'%')
+      </if>
+      <if test="null!=supplierContact and ''!=supplierContact ">
+        and supplier_contact like concat('%',#{supplierContact},'%')
+      </if>
+      <if test="null!=supplierTele and ''!=supplierTele ">
+        and supplier_tele like concat('%',#{supplierTele},'%')
+      </if>
+      <if test="null!=supplierEmail and ''!=supplierEmail ">
+        and supplier_email like concat('%',#{supplierEmail},'%')
+      </if>
+      order by supplier_id desc
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from supplier
     where supplier_id = #{supplierId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.zking.erp.base.model.Supplier" >
-    insert into supplier (supplier_id, supplier_name, supplier_address, 
+    insert into supplier ( supplier_name, supplier_address,
       supplier_contact, supplier_tele, supplier_email, 
       supplier_type)
-    values (#{supplierId,jdbcType=BIGINT}, #{supplierName,jdbcType=VARCHAR}, #{supplierAddress,jdbcType=VARCHAR}, 
+    values (#{supplierName,jdbcType=VARCHAR}, #{supplierAddress,jdbcType=VARCHAR},
       #{supplierContact,jdbcType=VARCHAR}, #{supplierTele,jdbcType=VARCHAR}, #{supplierEmail,jdbcType=VARCHAR}, 
       #{supplierType,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.zking.erp.base.model.Supplier" >
-    insert into supplier
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="supplierId != null" >
-        supplier_id,
-      </if>
-      <if test="supplierName != null" >
-        supplier_name,
-      </if>
-      <if test="supplierAddress != null" >
-        supplier_address,
-      </if>
-      <if test="supplierContact != null" >
-        supplier_contact,
-      </if>
-      <if test="supplierTele != null" >
-        supplier_tele,
-      </if>
-      <if test="supplierEmail != null" >
-        supplier_email,
-      </if>
-      <if test="supplierType != null" >
-        supplier_type,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="supplierId != null" >
-        #{supplierId,jdbcType=BIGINT},
-      </if>
-      <if test="supplierName != null" >
-        #{supplierName,jdbcType=VARCHAR},
-      </if>
-      <if test="supplierAddress != null" >
-        #{supplierAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="supplierContact != null" >
-        #{supplierContact,jdbcType=VARCHAR},
-      </if>
-      <if test="supplierTele != null" >
-        #{supplierTele,jdbcType=VARCHAR},
-      </if>
-      <if test="supplierEmail != null" >
-        #{supplierEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="supplierType != null" >
-        #{supplierType,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zking.erp.base.model.Supplier" >
-    update supplier
-    <set >
-      <if test="supplierName != null" >
-        supplier_name = #{supplierName,jdbcType=VARCHAR},
-      </if>
-      <if test="supplierAddress != null" >
-        supplier_address = #{supplierAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="supplierContact != null" >
-        supplier_contact = #{supplierContact,jdbcType=VARCHAR},
-      </if>
-      <if test="supplierTele != null" >
-        supplier_tele = #{supplierTele,jdbcType=VARCHAR},
-      </if>
-      <if test="supplierEmail != null" >
-        supplier_email = #{supplierEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="supplierType != null" >
-        supplier_type = #{supplierType,jdbcType=BIGINT},
-      </if>
-    </set>
-    where supplier_id = #{supplierId,jdbcType=BIGINT}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.zking.erp.base.model.Supplier" >
     update supplier
     set supplier_name = #{supplierName,jdbcType=VARCHAR},

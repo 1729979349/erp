@@ -17,14 +17,28 @@
     from dep
     where dep_id = #{depId,jdbcType=BIGINT}
   </select>
+  <select id="queryDepPager" resultType="com.zking.erp.base.model.Dep">
+    select <include refid="Base_Column_List"/> from dep where 1=1
+    <if test="null!=depName and ''!=depName">
+      and dep_name like concat('%',#{depName},'%')
+    </if>
+    <if test="null!=depTele and ''!=depTele">
+      and dep_tele like concat('%',#{depTele},'%')
+    </if>
+    order by dep_id desc
+  </select>
+  <select id="selectDepByName" resultType="com.zking.erp.base.model.Dep">
+    select <include refid="Base_Column_List"/> from dep where 1=1
+    and dep_name = #{depName}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from dep
     where dep_id = #{depId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.zking.erp.base.model.Dep" >
-    insert into dep (dep_id, dep_name, dep_tele
+    insert into dep (dep_name, dep_tele
       )
-    values (#{depId,jdbcType=BIGINT}, #{depName,jdbcType=VARCHAR}, #{depTele,jdbcType=VARCHAR}
+    values (#{depName,jdbcType=VARCHAR}, #{depTele,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zking.erp.base.model.Dep" >

@@ -30,6 +30,34 @@
     from orders
     where orders_id = #{ordersId,jdbcType=BIGINT}
   </select>
+    <select id="ordersTime" resultType="com.zking.erp.base.vo.OrdersVo">
+      select
+      b.goodstype_name as goodstypeNname,sum(d.orderdetail_money) as ordersTotalmoney from goods as a,goodstype as b ,orders as c,orderdetail as d
+      where a.goods_goodstype_id=b.goodstype_id and c.orders_id=d.orderdetail_orders_id
+      and d.orderdetail_goods_id =a.goods_id
+      and c.orders_type=1
+      <if test="StartTime!=null and StartTime!=''">
+        AND c.orders_endtime &gt;=str_to_date(#{StartTime},'%Y-%m-%d %H:%i:%S')
+      </if>
+      <if test="EndTime!=null and EndTime!=''">
+        AND c.orders_endtime &lt;=str_to_date(#{EndTime},'%Y-%m-%d %H:%i:%S')
+    </if>
+      group by b.goodstype_name order by ordersTotalmoney desc
+    </select>
+
+  <select id="ordersyear" resultType="java.util.Map">
+    select distinct year(orders_endtime) as y from orders
+  </select>
+
+  <select id="ordersMonthTime" resultType="java.util.Map">
+
+    select  sum(ordersTotalmoney) as ordersTotalmoney,month from ( select year(a.orders_endtime) as endtime,sum(b.orderdetail_money) as ordersTotalmoney , month(a.orders_endtime) as month
+    from orders a, orderdetail b where a.orders_id=b.orderdetail_id
+    and a.orders_type=1
+    group by a.orders_endtime HAVING endtime=#{year})b group by month
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from orders
     where orders_id = #{ordersId,jdbcType=BIGINT}

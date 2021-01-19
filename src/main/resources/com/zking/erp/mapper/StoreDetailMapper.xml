@@ -18,12 +18,52 @@
     from storedetail
     where storedetail_id = #{storedetailId,jdbcType=BIGINT}
   </select>
+  <!--<select id="selectAllPager" resultType="com.zking.erp.base.model.StoreDetail">
+    select c.storedetail_id, b.store_name,a.goods_name as name,c.storedetail_num as num from goods as a,store as b,storedetail as c where
+    a.goods_id=c.storedetail_goods_id and b.store_id=c.storedetail_store_id
+    /*select c.storedetailId, b.storeName,a.goodsName as name,c.storedetailNum as num from goods as a,store as b,storedetail as c where
+    a.goodsId=c.storedetailGoodsId and b.storeId=c.storedetailStoreId*/
+    &lt;!&ndash;<if test="null!=bookName and ''!=bookName">
+      and book_name like concat('%',#{bookName},'%')
+    </if>&ndash;&gt;
+/*    order by storedetail_id desc*/
+  </select>-->
+  <select id="selectAllPager" resultType="java.util.Map">
+    select c.storedetail_id, b.store_name,a.goods_name,c.storedetail_num from
+     goods as a,store as b,storedetail as c where a.goods_id=c.storedetail_goods_id and b.store_id=c.storedetail_store_id
+  </select>
+  <select id="selectAPager" resultType="java.util.Map">
+     select c.storedetail_id as storedetailId, b.store_name as storeName,a.goods_name as goodsName,c.storedetail_num as storedetailNum from
+      goods as a,store as b,storedetail as c where
+       a.goods_id=c.storedetail_goods_id and b.store_id=c.storedetail_store_id
+    <if test="storedetailStoreId!=null and ''!=storedetailStoreId">
+      and c.storedetail_store_id=#{storedetailStoreId}
+    </if>
+    <if test="storedetailGoodsId!=null and ''!=storedetailGoodsId">
+      and c.storedetail_goods_id=#{storedetailGoodsId}
+    </if>
+  </select>
+    <select id="queryStoredetailStoreIdAndStoredetailGoodsId"
+            resultType="com.zking.erp.base.model.StoreDetail">
+
+      select
+      <include refid="Base_Column_List" />
+      from storedetail
+      where storedetail_store_id=#{storedetailStoreId} and storedetail_goods_id=#{storedetailGoodsId}
+
+    </select>
+  <select id="selectWarningPager" resultType="java.util.Map">
+    select g.goods_id as goodsId,g.goods_name as goodsName,s.storedetail_num as storedetailNum,
+        (select SUM(o.orderdetail_num) from orderdetail o where o.orderdetail_goods_id=g.goods_id ) as dfhsl
+        from storedetail s,goods g,orderdetail o where s.storedetail_goods_id=g.goods_id and g.goods_id=o.orderdetail_goods_id
+        and o.orderdetail_num>s.storedetail_num
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from storedetail
     where storedetail_id = #{storedetailId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.zking.erp.base.model.StoreDetail" >
-    insert into storedetail (storedetail_id, storedetail_store_id, 
+    insert into storedetail (storedetail_id, storedetail_store_id,
       storedetail_goods_id, storedetail_num)
     values (#{storedetailId,jdbcType=BIGINT}, #{storedetailStoreId,jdbcType=BIGINT}, 
       #{storedetailGoodsId,jdbcType=BIGINT}, #{storedetailNum,jdbcType=INTEGER})
