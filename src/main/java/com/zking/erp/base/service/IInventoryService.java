@@ -1,7 +1,9 @@
 package com.zking.erp.base.service;
 
 import com.zking.erp.base.model.Inventory;
-import org.springframework.stereotype.Repository;
+import com.zking.erp.base.utils.JsonResponseBody;
+import com.zking.erp.base.utils.PageBean;
+import com.zking.erp.base.vo.InventoryVo;
 
 
 public interface IInventoryService {
@@ -16,4 +18,8 @@ public interface IInventoryService {
     int updateByPrimaryKeySelective(Inventory record);
 
     int updateByPrimaryKey(Inventory record);
+
+    JsonResponseBody<?> selectInPager(InventoryVo inventoryVo, PageBean pageBean);
+
+    JsonResponseBody<?> Examine(InventoryVo inventoryVo,Long id);
 }

@@ -18,4 +18,5 @@
         <import resource="spring-mybatis.xml"/>
         <import resource="spring-redis.xml"/>
         <import resource="shiro-spring.xml"/>
+        <import resource="spring-email.xml"/>
 </beans>
